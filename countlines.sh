@@ -1,11 +1,13 @@
 # Script to count lines
 
-line_count=$(wc -l < "$1")
 
-
-
-if (( $line_count <= 1 )); then
-	echo "$1" is "$line_count" lines long
-else
-	echo "$1" has more than one line
-fi
+# updated to include any number of files (i think $@ should work)
+for file in "$@"; do
+    line_count=$(wc -l < "$file") 
+    if (( line_count <= 1 )); then
+    	echo "$file is $line_count line long"
+    else
+    	echo "$file has more than one line"
+    fi
+    
+done
